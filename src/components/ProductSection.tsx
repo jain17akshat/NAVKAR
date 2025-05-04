@@ -17,12 +17,13 @@ interface ProductProps {
 
 const ProductCard = ({ id, title, description, icon, price, image }: ProductProps) => {
   return (
-    <Card className="product-card overflow-hidden h-full flex flex-col">
+    <Card className="product-card overflow-hidden h-full flex flex-col transition-all hover:-translate-y-1">
       <AspectRatio ratio={4/3}>
         <img 
           src={`https://source.unsplash.com/${image}`} 
           alt={title} 
-          className="object-cover w-full h-full"
+          className="object-cover w-full h-full transition-transform hover:scale-105"
+          loading="lazy"
         />
       </AspectRatio>
       <CardContent className="p-4 flex-grow">
@@ -33,9 +34,12 @@ const ProductCard = ({ id, title, description, icon, price, image }: ProductProp
         <p className="text-gray-600 text-center mb-3 text-sm">{description}</p>
         <p className="text-navyellow font-bold text-center text-lg">₹{price.toFixed(2)}</p>
       </CardContent>
-      <CardFooter className="pt-0 pb-4 px-4">
-        <Button variant="outline" className="w-full hover:bg-navyellow hover:text-gray-800 border-navyellow">
-          See More
+      <CardFooter className="pt-0 pb-4 px-4 flex gap-2">
+        <Button variant="outline" className="flex-1 hover:bg-navyellow hover:text-gray-800 border-navyellow">
+          View Details
+        </Button>
+        <Button className="flex-1 bg-navyellow hover:bg-navyellow-dark text-gray-800">
+          Add to Enquiry
         </Button>
       </CardFooter>
     </Card>
@@ -55,7 +59,8 @@ interface SectionProps {
 
 const ProductSection = ({ id, title, description, products }: SectionProps) => {
   const [currentPage, setCurrentPage] = useState(1);
-  const productsPerPage = 5;
+  const [isLoading, setIsLoading] = useState(false);
+  const productsPerPage = 12; // Show 12 products per page
   
   // Generate 100 products based on the provided templates
   const generateProducts = () => {
@@ -96,14 +101,21 @@ const ProductSection = ({ id, title, description, products }: SectionProps) => {
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
   const currentProducts = allProducts.slice(indexOfFirstProduct, indexOfLastProduct);
   
-  // Change page
+  // Change page with loading simulation
   const paginate = (pageNumber: number) => {
-    setCurrentPage(pageNumber);
-    // Scroll to top of the section when changing page
-    const section = document.getElementById(id);
-    if (section) {
-      section.scrollIntoView({ behavior: 'smooth' });
-    }
+    setIsLoading(true);
+    
+    // Simulate loading delay
+    setTimeout(() => {
+      setCurrentPage(pageNumber);
+      setIsLoading(false);
+      
+      // Scroll to top of the section when changing page
+      const section = document.getElementById(id);
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 500); // 500ms delay for loading simulation
   };
   
   // Calculate page numbers to display
@@ -139,25 +151,34 @@ const ProductSection = ({ id, title, description, products }: SectionProps) => {
         <h2 className="section-title">{title}</h2>
         <p className="text-gray-600 max-w-3xl mb-12">{description}</p>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-          {currentProducts.map((product) => (
-            <ProductCard
-              key={product.id}
-              id={product.id}
-              title={product.title}
-              description={product.description}
-              icon={product.icon}
-              price={product.price}
-              image={product.image}
-            />
-          ))}
-        </div>
+        {isLoading ? (
+          <div className="flex justify-center items-center h-96">
+            <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-navyellow"></div>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {currentProducts.map((product) => (
+              <ProductCard
+                key={product.id}
+                id={product.id}
+                title={product.title}
+                description={product.description}
+                icon={product.icon}
+                price={product.price}
+                image={product.image}
+              />
+            ))}
+          </div>
+        )}
         
-        <Pagination className="mt-8">
+        <Pagination className="mt-12">
           <PaginationContent>
             {currentPage > 1 && (
               <PaginationItem>
-                <PaginationPrevious onClick={() => paginate(currentPage - 1)} />
+                <PaginationPrevious 
+                  onClick={() => paginate(currentPage - 1)} 
+                  className="cursor-pointer"
+                />
               </PaginationItem>
             )}
             
@@ -171,6 +192,7 @@ const ProductSection = ({ id, title, description, products }: SectionProps) => {
                   <PaginationLink
                     isActive={currentPage === number}
                     onClick={() => paginate(Number(number))}
+                    className="cursor-pointer"
                   >
                     {number}
                   </PaginationLink>
@@ -180,7 +202,10 @@ const ProductSection = ({ id, title, description, products }: SectionProps) => {
             
             {currentPage < Math.ceil(allProducts.length / productsPerPage) && (
               <PaginationItem>
-                <PaginationNext onClick={() => paginate(currentPage + 1)} />
+                <PaginationNext 
+                  onClick={() => paginate(currentPage + 1)} 
+                  className="cursor-pointer"
+                />
               </PaginationItem>
             )}
           </PaginationContent>
