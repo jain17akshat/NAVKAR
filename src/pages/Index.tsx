@@ -1,3 +1,4 @@
+
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import CategorySection from "../components/CategorySection";
@@ -59,7 +60,7 @@ const Index = () => {
     {
       title: "Jeans",
       description: "Trendy designs for modern women",
-      icon: <Pants className="text-gray-700 h-8 w-8" />
+      icon: <ShirtIcon className="text-gray-700 h-8 w-8" />
     },
     {
       title: "Salwar-Kurta",
@@ -82,7 +83,7 @@ const Index = () => {
     {
       title: "Boys Jeans",
       description: "Comfortable jeans for active boys",
-      icon: <Pants className="text-gray-700 h-8 w-8" />
+      icon: <ShirtIcon className="text-gray-700 h-8 w-8" />
     },
     {
       title: "Boys T-Shirts",
