@@ -97,7 +97,14 @@ const ProductSection = ({ id, title, description, products }: SectionProps) => {
   const currentProducts = allProducts.slice(indexOfFirstProduct, indexOfLastProduct);
   
   // Change page
-  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+  const paginate = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+    // Scroll to top of the section when changing page
+    const section = document.getElementById(id);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
   
   // Calculate page numbers to display
   const pageNumbers = [];
