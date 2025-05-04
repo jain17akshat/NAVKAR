@@ -1,18 +1,17 @@
-
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import CategorySection from "../components/CategorySection";
 import ProductSection from "../components/ProductSection";
 import ContactSection from "../components/ContactSection";
 import Footer from "../components/Footer";
-import { Shirt, Jeans, Trousers, Kurta, Blazer, TShirt } from 'lucide-react';
+import { Shirt, Pants, ShirtIcon, Bookmark, FileText } from 'lucide-react';
 
 const Index = () => {
   const menProducts = [
     {
       title: "Jeans",
       description: "Premium denim with perfect fit",
-      icon: <Jeans className="text-gray-700 h-8 w-8" />
+      icon: <Pants className="text-gray-700 h-8 w-8" />
     },
     {
       title: "Formal Shirts",
@@ -22,32 +21,32 @@ const Index = () => {
     {
       title: "Formal Pants",
       description: "Comfortable and stylish trousers",
-      icon: <Trousers className="text-gray-700 h-8 w-8" />
+      icon: <Pants className="text-gray-700 h-8 w-8" />
     },
     {
       title: "Kurtas",
       description: "Traditional wear for all occasions",
-      icon: <Kurta className="text-gray-700 h-8 w-8" />
+      icon: <ShirtIcon className="text-gray-700 h-8 w-8" />
     },
     {
       title: "Blazer Sets",
       description: "Premium blazers for formal events",
-      icon: <Blazer className="text-gray-700 h-8 w-8" />
+      icon: <FileText className="text-gray-700 h-8 w-8" />
     },
     {
       title: "T-Shirts",
       description: "Casual t-shirts for everyday wear",
-      icon: <TShirt className="text-gray-700 h-8 w-8" />
+      icon: <Shirt className="text-gray-700 h-8 w-8" />
     },
     {
       title: "Casual Shirts",
       description: "Relaxed fits for casual occasions",
-      icon: <Shirt className="text-gray-700 h-8 w-8" />
+      icon: <ShirtIcon className="text-gray-700 h-8 w-8" />
     },
     {
       title: "Ethnic Wear",
       description: "Traditional outfits for festivals",
-      icon: <Kurta className="text-gray-700 h-8 w-8" />
+      icon: <Bookmark className="text-gray-700 h-8 w-8" />
     }
   ];
 
@@ -55,27 +54,27 @@ const Index = () => {
     {
       title: "Tops",
       description: "Stylish tops for every occasion",
-      icon: <Shirt className="text-gray-700 h-8 w-8" />
+      icon: <ShirtIcon className="text-gray-700 h-8 w-8" />
     },
     {
       title: "Jeans",
       description: "Trendy designs for modern women",
-      icon: <Jeans className="text-gray-700 h-8 w-8" />
+      icon: <Pants className="text-gray-700 h-8 w-8" />
     },
     {
       title: "Salwar-Kurta",
       description: "Elegant ethnic wear collection",
-      icon: <Kurta className="text-gray-700 h-8 w-8" />
+      icon: <Bookmark className="text-gray-700 h-8 w-8" />
     },
     {
       title: "Dresses",
       description: "Beautiful dresses for all occasions",
-      icon: <Shirt className="text-gray-700 h-8 w-8" />
+      icon: <ShirtIcon className="text-gray-700 h-8 w-8" />
     },
     {
       title: "Sarees",
       description: "Traditional sarees with modern touch",
-      icon: <Kurta className="text-gray-700 h-8 w-8" />
+      icon: <Bookmark className="text-gray-700 h-8 w-8" />
     }
   ];
 
@@ -83,12 +82,12 @@ const Index = () => {
     {
       title: "Boys Jeans",
       description: "Comfortable jeans for active boys",
-      icon: <Jeans className="text-gray-700 h-8 w-8" />
+      icon: <Pants className="text-gray-700 h-8 w-8" />
     },
     {
       title: "Boys T-Shirts",
       description: "Fun and colorful t-shirts",
-      icon: <TShirt className="text-gray-700 h-8 w-8" />
+      icon: <ShirtIcon className="text-gray-700 h-8 w-8" />
     },
     {
       title: "Boys Shirts",
@@ -98,12 +97,12 @@ const Index = () => {
     {
       title: "Girls Frocks",
       description: "Pretty frocks for little girls",
-      icon: <Shirt className="text-gray-700 h-8 w-8" />
+      icon: <ShirtIcon className="text-gray-700 h-8 w-8" />
     },
     {
       title: "Girls Tops",
       description: "Cute tops for everyday wear",
-      icon: <Shirt className="text-gray-700 h-8 w-8" />
+      icon: <ShirtIcon className="text-gray-700 h-8 w-8" />
     }
   ];
 
@@ -111,17 +110,17 @@ const Index = () => {
     {
       title: "Formal Suits",
       description: "Premium quality suits for work",
-      icon: <Blazer className="text-gray-700 h-8 w-8" />
+      icon: <FileText className="text-gray-700 h-8 w-8" />
     },
     {
       title: "Wedding Blazers",
       description: "Elegant blazers for special occasions",
-      icon: <Blazer className="text-gray-700 h-8 w-8" />
+      icon: <FileText className="text-gray-700 h-8 w-8" />
     },
     {
       title: "Casual Blazers",
       description: "Smart casual blazers for daily wear",
-      icon: <Blazer className="text-gray-700 h-8 w-8" />
+      icon: <FileText className="text-gray-700 h-8 w-8" />
     }
   ];
 

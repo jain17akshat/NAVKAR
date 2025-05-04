@@ -1,5 +1,5 @@
 
-import { Shirt, Jeans, Trousers, Kurta, Blazer } from 'lucide-react';
+import { Shirt, Pants, ShirtIcon, Bookmark, FileText } from 'lucide-react';
 
 interface ProductProps {
   title: string;
