@@ -4,14 +4,14 @@ import CategorySection from "../components/CategorySection";
 import ProductSection from "../components/ProductSection";
 import ContactSection from "../components/ContactSection";
 import Footer from "../components/Footer";
-import { Shirt, Pants, ShirtIcon, Bookmark, FileText } from 'lucide-react';
+import { Shirt, ShirtIcon, Bookmark, FileText } from 'lucide-react';
 
 const Index = () => {
   const menProducts = [
     {
       title: "Jeans",
       description: "Premium denim with perfect fit",
-      icon: <Pants className="text-gray-700 h-8 w-8" />
+      icon: <ShirtIcon className="text-gray-700 h-8 w-8" />
     },
     {
       title: "Formal Shirts",
@@ -21,7 +21,7 @@ const Index = () => {
     {
       title: "Formal Pants",
       description: "Comfortable and stylish trousers",
-      icon: <Pants className="text-gray-700 h-8 w-8" />
+      icon: <ShirtIcon className="text-gray-700 h-8 w-8" />
     },
     {
       title: "Kurtas",
