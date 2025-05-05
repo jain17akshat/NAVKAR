@@ -16,9 +16,11 @@ const Navbar = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center space-x-2">
-            <div className="h-10 w-10 rounded-full bg-navyellow flex items-center justify-center text-white font-bold text-xl">
-              N
-            </div>
+            <img 
+              src="/lovable-uploads/d63a034e-849e-4aef-b43e-2ecae321f8da.png" 
+              alt="Navkar Fashion Logo" 
+              className="h-10 w-auto"
+            />
             <span className="text-xl md:text-2xl font-bold">Navkar Fashion</span>
           </div>
 

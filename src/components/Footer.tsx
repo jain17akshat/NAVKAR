@@ -6,9 +6,11 @@ const Footer = () => {
         <div className="flex flex-wrap">
           <div className="w-full md:w-1/3 mb-8">
             <div className="flex items-center space-x-2 mb-4">
-              <div className="h-10 w-10 rounded-full bg-navyellow flex items-center justify-center text-white font-bold text-xl">
-                N
-              </div>
+              <img 
+                src="/lovable-uploads/d63a034e-849e-4aef-b43e-2ecae321f8da.png" 
+                alt="Navkar Fashion Logo" 
+                className="h-10 w-auto"
+              />
               <span className="text-xl font-bold">Navkar Fashion</span>
             </div>
             <p className="text-gray-300 mb-4">
