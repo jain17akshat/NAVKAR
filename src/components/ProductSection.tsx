@@ -1,11 +1,12 @@
 
-import { Shirt, ShirtIcon, Bookmark, FileText } from 'lucide-react';
+import { Shirt, ShirtIcon, Bookmark, FileText, ZoomIn, ZoomOut } from 'lucide-react';
 import { useState } from 'react';
-import { Card, CardContent, CardFooter } from "./ui/card";
+import { Card, CardContent } from "./ui/card";
 import { AspectRatio } from "./ui/aspect-ratio";
 import { Button } from "./ui/button";
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "./ui/pagination";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
+import { Dialog, DialogContent } from "./ui/dialog";
 
 interface ProductProps {
   id: number;
@@ -16,34 +17,82 @@ interface ProductProps {
   image: string;
 }
 
-const ProductCard = ({ id, title, description, icon, price, image }: ProductProps) => {
+const ProductGalleryItem = ({ id, title, image }: ProductProps) => {
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [zoomLevel, setZoomLevel] = useState(1);
+
+  const handleZoomIn = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setZoomLevel((prev) => Math.min(prev + 0.25, 3));
+  };
+
+  const handleZoomOut = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setZoomLevel((prev) => Math.max(prev - 0.25, 1));
+  };
+
+  const resetZoom = () => {
+    setZoomLevel(1);
+  };
+
   return (
-    <Card className="product-card overflow-hidden h-full flex flex-col transition-all hover:-translate-y-1">
-      <AspectRatio ratio={4/3}>
-        <img 
-          src={`https://source.unsplash.com/${image}`} 
-          alt={title} 
-          className="object-cover w-full h-full transition-transform hover:scale-105"
-          loading="lazy"
-        />
-      </AspectRatio>
-      <CardContent className="p-4 flex-grow">
-        <div className="flex items-center justify-center w-10 h-10 bg-navyellow/20 rounded-full mb-3 mx-auto">
-          {icon}
+    <>
+      <div 
+        className="product-gallery-item cursor-pointer overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-all"
+        onClick={() => setIsDialogOpen(true)}
+      >
+        <AspectRatio ratio={1/1} className="bg-gray-100">
+          <img 
+            src={`https://source.unsplash.com/${image}`} 
+            alt={title} 
+            className="object-cover w-full h-full"
+            loading="lazy"
+          />
+        </AspectRatio>
+        <div className="p-2 bg-white">
+          <h4 className="text-sm font-medium text-gray-800 text-center">{title}</h4>
         </div>
-        <h3 className="text-xl font-semibold text-gray-800 text-center mb-2">{title}</h3>
-        <p className="text-gray-600 text-center mb-3 text-sm">{description}</p>
-        <p className="text-navyellow font-bold text-center text-lg">₹{price.toFixed(2)}</p>
-      </CardContent>
-      <CardFooter className="pt-0 pb-4 px-4 flex gap-2">
-        <Button variant="outline" className="flex-1 hover:bg-navyellow hover:text-gray-800 border-navyellow">
-          View Details
-        </Button>
-        <Button className="flex-1 bg-navyellow hover:bg-navyellow-dark text-gray-800">
-          Add to Enquiry
-        </Button>
-      </CardFooter>
-    </Card>
+      </div>
+
+      <Dialog open={isDialogOpen} onOpenChange={(open) => {
+        setIsDialogOpen(open);
+        if (!open) resetZoom();
+      }}>
+        <DialogContent className="max-w-4xl p-0 bg-white overflow-hidden">
+          <div className="relative flex justify-center items-center h-[80vh] overflow-hidden bg-black">
+            <div className="absolute top-4 right-4 flex gap-2 z-10">
+              <Button 
+                size="icon" 
+                variant="outline" 
+                className="bg-white/80 backdrop-blur-sm rounded-full h-8 w-8"
+                onClick={handleZoomIn}
+              >
+                <ZoomIn className="h-4 w-4" />
+              </Button>
+              <Button 
+                size="icon" 
+                variant="outline" 
+                className="bg-white/80 backdrop-blur-sm rounded-full h-8 w-8"
+                onClick={handleZoomOut}
+              >
+                <ZoomOut className="h-4 w-4" />
+              </Button>
+            </div>
+            <div className="overflow-auto max-h-full max-w-full p-4">
+              <img 
+                src={`https://source.unsplash.com/${image}`} 
+                alt={title}
+                className="transition-transform duration-200 ease-out"
+                style={{ transform: `scale(${zoomLevel})` }}
+              />
+            </div>
+            <h3 className="absolute bottom-4 left-4 text-white bg-black/50 p-2 rounded text-lg">
+              {title}
+            </h3>
+          </div>
+        </DialogContent>
+      </Dialog>
+    </>
   );
 };
 
@@ -117,7 +166,7 @@ const ProductSection = ({ id, title, description, products, subCategories = [] }
   const generatedSubCategories = subCategories.map(subCat => ({
     id: subCat.id,
     title: subCat.title,
-    products: generateProducts(subCat.products, 30) // Fewer products per subcategory
+    products: generateProducts(subCat.products, 100) // 100 products per subcategory for gallery
   }));
   
   // Get current products for pagination based on active tab
@@ -239,9 +288,9 @@ const ProductSection = ({ id, title, description, products, subCategories = [] }
             <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-navyellow"></div>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
             {currentProducts.map((product) => (
-              <ProductCard
+              <ProductGalleryItem
                 key={product.id}
                 id={product.id}
                 title={product.title}
