@@ -5,6 +5,7 @@ import { Card, CardContent, CardFooter } from "./ui/card";
 import { AspectRatio } from "./ui/aspect-ratio";
 import { Button } from "./ui/button";
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "./ui/pagination";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
 
 interface ProductProps {
   id: number;
@@ -46,6 +47,12 @@ const ProductCard = ({ id, title, description, icon, price, image }: ProductProp
   );
 };
 
+interface SubCategory {
+  id: string;
+  title: string;
+  products: ProductProps[];
+}
+
 interface SectionProps {
   id: string;
   title: string;
@@ -55,15 +62,25 @@ interface SectionProps {
     description: string;
     icon: React.ReactNode;
   }[];
+  subCategories?: {
+    id: string;
+    title: string;
+    products: {
+      title: string;
+      description: string;
+      icon: React.ReactNode;
+    }[];
+  }[];
 }
 
-const ProductSection = ({ id, title, description, products }: SectionProps) => {
+const ProductSection = ({ id, title, description, products, subCategories = [] }: SectionProps) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
+  const [activeTab, setActiveTab] = useState("all");
   const productsPerPage = 12; // Show 12 products per page
   
-  // Generate 100 products based on the provided templates
-  const generateProducts = () => {
+  // Generate products based on the provided templates
+  const generateProducts = (productTemplates: any[], count = 100) => {
     const expandedProducts = [];
     const imageOptions = [
       'photo-1519389950473-47ba0277781c',
@@ -76,14 +93,14 @@ const ProductSection = ({ id, title, description, products }: SectionProps) => {
       'photo-1487887235947-a955ef187fcc',
     ];
     
-    for (let i = 0; i < 100; i++) {
-      const baseProduct = products[i % products.length];
+    for (let i = 0; i < count; i++) {
+      const baseProduct = productTemplates[i % productTemplates.length];
       const randomPrice = Math.floor(Math.random() * 3000) + 500; // Prices between 500 and 3500
       const randomImage = imageOptions[Math.floor(Math.random() * imageOptions.length)];
       
       expandedProducts.push({
         id: i + 1,
-        title: `${baseProduct.title} ${Math.floor(i / products.length) + 1}`,
+        title: `${baseProduct.title} ${Math.floor(i / productTemplates.length) + 1}`,
         description: baseProduct.description,
         icon: baseProduct.icon,
         price: randomPrice,
@@ -94,12 +111,46 @@ const ProductSection = ({ id, title, description, products }: SectionProps) => {
     return expandedProducts;
   };
   
-  const allProducts = generateProducts();
+  // Generate all products and sub-category products
+  const allProducts = generateProducts(products);
   
-  // Get current products for pagination
-  const indexOfLastProduct = currentPage * productsPerPage;
-  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = allProducts.slice(indexOfFirstProduct, indexOfLastProduct);
+  const generatedSubCategories = subCategories.map(subCat => ({
+    id: subCat.id,
+    title: subCat.title,
+    products: generateProducts(subCat.products, 30) // Fewer products per subcategory
+  }));
+  
+  // Get current products for pagination based on active tab
+  const getCurrentProducts = () => {
+    let productsToDisplay = allProducts;
+    
+    if (activeTab !== "all") {
+      const selectedSubCategory = generatedSubCategories.find(subCat => subCat.id === activeTab);
+      if (selectedSubCategory) {
+        productsToDisplay = selectedSubCategory.products;
+      }
+    }
+    
+    const indexOfLastProduct = currentPage * productsPerPage;
+    const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+    return productsToDisplay.slice(indexOfFirstProduct, indexOfLastProduct);
+  };
+  
+  const currentProducts = getCurrentProducts();
+  
+  // Get total number of pages based on active tab
+  const getTotalPages = () => {
+    let productsToDisplay = allProducts;
+    
+    if (activeTab !== "all") {
+      const selectedSubCategory = generatedSubCategories.find(subCat => subCat.id === activeTab);
+      if (selectedSubCategory) {
+        productsToDisplay = selectedSubCategory.products;
+      }
+    }
+    
+    return Math.ceil(productsToDisplay.length / productsPerPage);
+  };
   
   // Change page with loading simulation
   const paginate = (pageNumber: number) => {
@@ -118,15 +169,19 @@ const ProductSection = ({ id, title, description, products }: SectionProps) => {
     }, 500); // 500ms delay for loading simulation
   };
   
-  // Calculate page numbers to display
-  const pageNumbers = [];
-  for (let i = 1; i <= Math.ceil(allProducts.length / productsPerPage); i++) {
-    pageNumbers.push(i);
-  }
+  // Handle tab change
+  const handleTabChange = (tabId: string) => {
+    setActiveTab(tabId);
+    setCurrentPage(1); // Reset to first page when changing tabs
+  };
   
-  // Show a subset of page numbers
+  // Calculate page numbers to display
   const getDisplayedPageNumbers = () => {
-    const totalPages = Math.ceil(allProducts.length / productsPerPage);
+    const totalPages = getTotalPages();
+    const pageNumbers = [];
+    for (let i = 1; i <= totalPages; i++) {
+      pageNumbers.push(i);
+    }
     
     if (totalPages <= 5) return pageNumbers;
     
@@ -150,6 +205,34 @@ const ProductSection = ({ id, title, description, products }: SectionProps) => {
       <div className="container mx-auto px-4">
         <h2 className="section-title">{title}</h2>
         <p className="text-gray-600 max-w-3xl mb-12">{description}</p>
+        
+        {/* Sub-category tabs */}
+        {generatedSubCategories.length > 0 && (
+          <Tabs 
+            defaultValue="all" 
+            value={activeTab}
+            onValueChange={handleTabChange}
+            className="mb-8"
+          >
+            <TabsList className="bg-gray-100 p-1 mb-6 flex flex-wrap justify-center gap-1">
+              <TabsTrigger 
+                value="all"
+                className="data-[state=active]:bg-navyellow data-[state=active]:text-gray-800"
+              >
+                All {title}
+              </TabsTrigger>
+              {generatedSubCategories.map(subCat => (
+                <TabsTrigger 
+                  key={subCat.id} 
+                  value={subCat.id}
+                  className="data-[state=active]:bg-navyellow data-[state=active]:text-gray-800"
+                >
+                  {subCat.title}
+                </TabsTrigger>
+              ))}
+            </TabsList>
+          </Tabs>
+        )}
         
         {isLoading ? (
           <div className="flex justify-center items-center h-96">
@@ -200,7 +283,7 @@ const ProductSection = ({ id, title, description, products }: SectionProps) => {
               )
             ))}
             
-            {currentPage < Math.ceil(allProducts.length / productsPerPage) && (
+            {currentPage < getTotalPages() && (
               <PaginationItem>
                 <PaginationNext 
                   onClick={() => paginate(currentPage + 1)} 
