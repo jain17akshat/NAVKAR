@@ -9,8 +9,8 @@ interface CategoryProps {
 
 const CategoryCard = ({ title, image, link }: CategoryProps) => {
   return (
-    <a href={link} className="category-card group">
-      <div className="relative overflow-hidden">
+    <a href={link} className="category-card group h-full">
+      <div className="relative overflow-hidden h-full">
         <img
           src={image}
           alt={title}
@@ -34,7 +34,7 @@ const CategorySection = () => {
     <section className="py-12 md:py-16 bg-gray-50">
       <div className="container mx-auto px-4">
         <h2 className="section-title">Browse Categories</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mt-8 sm:mt-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mt-8 sm:mt-12 auto-rows-fr">
           <CategoryCard
             title="Men's Collection"
             image="https://images.unsplash.com/photo-1581092795360-fd1ca04f0952"

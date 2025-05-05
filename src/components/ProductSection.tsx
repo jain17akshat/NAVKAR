@@ -1,3 +1,4 @@
+
 import { Shirt, ShirtIcon, Bookmark, FileText, ZoomIn, ZoomOut } from 'lucide-react';
 import { useState } from 'react';
 import { Card, CardContent } from "./ui/card";
@@ -39,7 +40,7 @@ const ProductGalleryItem = ({ id, title, image }: ProductProps) => {
   return (
     <>
       <div 
-        className="product-gallery-item cursor-pointer overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-all"
+        className="product-gallery-item cursor-pointer overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-all h-full"
         onClick={() => setIsDialogOpen(true)}
       >
         <AspectRatio ratio={1/1} className="bg-gray-100">
@@ -309,7 +310,7 @@ const ProductSection = ({ id, title, description, products, subCategories = [] }
             <div className="animate-spin rounded-full h-12 w-12 sm:h-16 sm:w-16 border-t-4 border-b-4 border-navyellow"></div>
           </div>
         ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 sm:gap-4 auto-rows-fr">
             {currentProducts.map((product) => (
               <ProductGalleryItem
                 key={product.id}
