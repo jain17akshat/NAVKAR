@@ -6,7 +6,7 @@ const Hero = () => {
         <div className="flex flex-col md:flex-row items-center">
           <div className="w-full md:w-1/2 mb-10 md:mb-0">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 mb-4 leading-tight">
-              Welcome to <span className="text-white">Navkar Fashion</span>
+              Welcome to <span className="text-white"></span>
             </h1>
             <h2 className="text-2xl md:text-3xl font-semibold text-gray-800 mb-6">
               Fashion for All!
