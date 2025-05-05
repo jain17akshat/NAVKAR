@@ -14,12 +14,12 @@ const CategoryCard = ({ title, image, link }: CategoryProps) => {
         <img
           src={image}
           alt={title}
-          className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105"
+          className="w-full h-48 sm:h-64 object-cover transition-transform duration-300 group-hover:scale-105"
         />
         <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center transition-opacity duration-300 group-hover:bg-opacity-30">
-          <div className="text-center">
-            <h3 className="text-2xl font-bold text-white mb-2">{title}</h3>
-            <span className="inline-flex items-center text-navyellow font-medium">
+          <div className="text-center px-2">
+            <h3 className="text-xl sm:text-2xl font-bold text-white mb-1 sm:mb-2">{title}</h3>
+            <span className="inline-flex items-center text-navyellow font-medium text-sm sm:text-base">
               Browse Collection <ArrowRight size={16} className="ml-1" />
             </span>
           </div>
@@ -31,10 +31,10 @@ const CategoryCard = ({ title, image, link }: CategoryProps) => {
 
 const CategorySection = () => {
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="py-12 md:py-16 bg-gray-50">
       <div className="container mx-auto px-4">
         <h2 className="section-title">Browse Categories</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mt-8 sm:mt-12">
           <CategoryCard
             title="Men's Collection"
             image="https://images.unsplash.com/photo-1581092795360-fd1ca04f0952"

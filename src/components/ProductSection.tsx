@@ -1,4 +1,3 @@
-
 import { Shirt, ShirtIcon, Bookmark, FileText, ZoomIn, ZoomOut } from 'lucide-react';
 import { useState } from 'react';
 import { Card, CardContent } from "./ui/card";
@@ -7,6 +6,7 @@ import { Button } from "./ui/button";
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "./ui/pagination";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
 import { Dialog, DialogContent } from "./ui/dialog";
+import { useIsMobile } from "../hooks/use-mobile";
 
 interface ProductProps {
   id: number;
@@ -20,6 +20,7 @@ interface ProductProps {
 const ProductGalleryItem = ({ id, title, image }: ProductProps) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [zoomLevel, setZoomLevel] = useState(1);
+  const isMobile = useIsMobile();
 
   const handleZoomIn = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -49,8 +50,8 @@ const ProductGalleryItem = ({ id, title, image }: ProductProps) => {
             loading="lazy"
           />
         </AspectRatio>
-        <div className="p-2 bg-white">
-          <h4 className="text-sm font-medium text-gray-800 text-center">{title}</h4>
+        <div className="p-1 sm:p-2 bg-white">
+          <h4 className="text-xs sm:text-sm font-medium text-gray-800 text-center truncate">{title}</h4>
         </div>
       </div>
 
@@ -58,27 +59,27 @@ const ProductGalleryItem = ({ id, title, image }: ProductProps) => {
         setIsDialogOpen(open);
         if (!open) resetZoom();
       }}>
-        <DialogContent className="max-w-4xl p-0 bg-white overflow-hidden">
-          <div className="relative flex justify-center items-center h-[80vh] overflow-hidden bg-black">
-            <div className="absolute top-4 right-4 flex gap-2 z-10">
+        <DialogContent className="max-w-4xl p-0 bg-white overflow-hidden sm:max-h-[90vh] max-h-[85vh] w-[95vw] sm:w-auto">
+          <div className="relative flex justify-center items-center h-[70vh] sm:h-[80vh] overflow-hidden bg-black">
+            <div className="absolute top-2 sm:top-4 right-2 sm:right-4 flex gap-1 sm:gap-2 z-10">
               <Button 
                 size="icon" 
                 variant="outline" 
-                className="bg-white/80 backdrop-blur-sm rounded-full h-8 w-8"
+                className="bg-white/80 backdrop-blur-sm rounded-full h-7 w-7 sm:h-8 sm:w-8"
                 onClick={handleZoomIn}
               >
-                <ZoomIn className="h-4 w-4" />
+                <ZoomIn className="h-3 w-3 sm:h-4 sm:w-4" />
               </Button>
               <Button 
                 size="icon" 
                 variant="outline" 
-                className="bg-white/80 backdrop-blur-sm rounded-full h-8 w-8"
+                className="bg-white/80 backdrop-blur-sm rounded-full h-7 w-7 sm:h-8 sm:w-8"
                 onClick={handleZoomOut}
               >
-                <ZoomOut className="h-4 w-4" />
+                <ZoomOut className="h-3 w-3 sm:h-4 sm:w-4" />
               </Button>
             </div>
-            <div className="overflow-auto max-h-full max-w-full p-4">
+            <div className="overflow-auto max-h-full max-w-full p-2 sm:p-4">
               <img 
                 src={`https://source.unsplash.com/${image}`} 
                 alt={title}
@@ -86,7 +87,7 @@ const ProductGalleryItem = ({ id, title, image }: ProductProps) => {
                 style={{ transform: `scale(${zoomLevel})` }}
               />
             </div>
-            <h3 className="absolute bottom-4 left-4 text-white bg-black/50 p-2 rounded text-lg">
+            <h3 className="absolute bottom-2 sm:bottom-4 left-2 sm:left-4 text-white bg-black/50 p-1 sm:p-2 rounded text-sm sm:text-lg max-w-[90%] truncate">
               {title}
             </h3>
           </div>
@@ -126,7 +127,10 @@ const ProductSection = ({ id, title, description, products, subCategories = [] }
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [activeTab, setActiveTab] = useState("all");
-  const productsPerPage = 12; // Show 12 products per page
+  const isMobile = useIsMobile();
+  
+  // For mobile, show fewer products per page
+  const productsPerPage = isMobile ? 8 : 12; 
   
   // Generate products based on the provided templates
   const generateProducts = (productTemplates: any[], count = 100) => {
@@ -215,7 +219,7 @@ const ProductSection = ({ id, title, description, products, subCategories = [] }
       if (section) {
         section.scrollIntoView({ behavior: 'smooth' });
       }
-    }, 500); // 500ms delay for loading simulation
+    }, 300); // Reduced loading time for better mobile experience
   };
   
   // Handle tab change
@@ -224,71 +228,88 @@ const ProductSection = ({ id, title, description, products, subCategories = [] }
     setCurrentPage(1); // Reset to first page when changing tabs
   };
   
-  // Calculate page numbers to display
+  // Calculate page numbers to display - simplified for mobile
   const getDisplayedPageNumbers = () => {
     const totalPages = getTotalPages();
-    const pageNumbers = [];
-    for (let i = 1; i <= totalPages; i++) {
-      pageNumbers.push(i);
-    }
     
-    if (totalPages <= 5) return pageNumbers;
-    
-    if (currentPage <= 3) {
-      return [...pageNumbers.slice(0, 5), null, totalPages];
-    } else if (currentPage >= totalPages - 2) {
-      return [1, null, ...pageNumbers.slice(totalPages - 5)];
+    if (isMobile) {
+      // On mobile show fewer page numbers
+      if (totalPages <= 3) return Array.from({length: totalPages}, (_, i) => i + 1);
+      
+      if (currentPage <= 2) {
+        return [1, 2, null, totalPages];
+      } else if (currentPage >= totalPages - 1) {
+        return [1, null, totalPages - 1, totalPages];
+      } else {
+        return [1, null, currentPage, null, totalPages];
+      }
     } else {
-      return [
-        1, 
-        null, 
-        ...pageNumbers.slice(currentPage - 2, currentPage + 1),
-        null,
-        totalPages
-      ];
+      // Desktop pagination - keep existing logic
+      const pageNumbers = [];
+      for (let i = 1; i <= totalPages; i++) {
+        pageNumbers.push(i);
+      }
+      
+      if (totalPages <= 5) return pageNumbers;
+      
+      if (currentPage <= 3) {
+        return [...pageNumbers.slice(0, 5), null, totalPages];
+      } else if (currentPage >= totalPages - 2) {
+        return [1, null, ...pageNumbers.slice(totalPages - 5)];
+      } else {
+        return [
+          1, 
+          null, 
+          ...pageNumbers.slice(currentPage - 2, currentPage + 1),
+          null,
+          totalPages
+        ];
+      }
     }
   };
   
   return (
-    <section id={id} className="py-16">
-      <div className="container mx-auto px-4">
+    <section id={id} className="py-10 sm:py-16">
+      <div className="container mx-auto px-3 sm:px-4">
         <h2 className="section-title">{title}</h2>
-        <p className="text-gray-600 max-w-3xl mb-12">{description}</p>
+        <p className="text-gray-600 max-w-3xl mb-6 sm:mb-12 text-sm sm:text-base">{description}</p>
         
-        {/* Sub-category tabs */}
+        {/* Sub-category tabs - scrollable on mobile */}
         {generatedSubCategories.length > 0 && (
           <Tabs 
             defaultValue="all" 
             value={activeTab}
             onValueChange={handleTabChange}
-            className="mb-8"
+            className="mb-6 sm:mb-8"
           >
-            <TabsList className="bg-gray-100 p-1 mb-6 flex flex-wrap justify-center gap-1">
-              <TabsTrigger 
-                value="all"
-                className="data-[state=active]:bg-navyellow data-[state=active]:text-gray-800"
-              >
-                All {title}
-              </TabsTrigger>
-              {generatedSubCategories.map(subCat => (
+            <div className="overflow-x-auto pb-2">
+              <TabsList className="bg-gray-100 p-1 mb-4 sm:mb-6 flex flex-nowrap justify-start sm:justify-center gap-1 min-w-max w-auto">
                 <TabsTrigger 
-                  key={subCat.id} 
-                  value={subCat.id}
-                  className="data-[state=active]:bg-navyellow data-[state=active]:text-gray-800"
+                  value="all"
+                  className="data-[state=active]:bg-navyellow data-[state=active]:text-gray-800 whitespace-nowrap text-xs sm:text-sm"
                 >
-                  {subCat.title}
+                  All {title}
                 </TabsTrigger>
-              ))}
-            </TabsList>
+                {generatedSubCategories.map(subCat => (
+                  <TabsTrigger 
+                    key={subCat.id} 
+                    value={subCat.id}
+                    className="data-[state=active]:bg-navyellow data-[state=active]:text-gray-800 whitespace-nowrap text-xs sm:text-sm"
+                  >
+                    {subCat.title}
+                  </TabsTrigger>
+                ))}
+              </TabsList>
+            </div>
           </Tabs>
         )}
         
         {isLoading ? (
-          <div className="flex justify-center items-center h-96">
-            <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-navyellow"></div>
+          <div className="flex justify-center items-center h-60 sm:h-96">
+            <div className="animate-spin rounded-full h-12 w-12 sm:h-16 sm:w-16 border-t-4 border-b-4 border-navyellow"></div>
           </div>
         ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-4">
             {currentProducts.map((product) => (
               <ProductGalleryItem
                 key={product.id}
@@ -303,13 +324,13 @@ const ProductSection = ({ id, title, description, products, subCategories = [] }
           </div>
         )}
         
-        <Pagination className="mt-12">
-          <PaginationContent>
+        <Pagination className="mt-8 sm:mt-12">
+          <PaginationContent className="flex flex-wrap justify-center">
             {currentPage > 1 && (
               <PaginationItem>
                 <PaginationPrevious 
                   onClick={() => paginate(currentPage - 1)} 
-                  className="cursor-pointer"
+                  className="cursor-pointer h-9 w-9 sm:h-10 sm:w-10 flex items-center justify-center"
                 />
               </PaginationItem>
             )}
@@ -317,14 +338,14 @@ const ProductSection = ({ id, title, description, products, subCategories = [] }
             {getDisplayedPageNumbers().map((number, index) => (
               number === null ? (
                 <PaginationItem key={`ellipsis-${index}`}>
-                  <span className="flex h-10 w-10 items-center justify-center">...</span>
+                  <span className="flex h-9 w-5 sm:h-10 sm:w-10 items-center justify-center">...</span>
                 </PaginationItem>
               ) : (
                 <PaginationItem key={`page-${number}`}>
                   <PaginationLink
                     isActive={currentPage === number}
                     onClick={() => paginate(Number(number))}
-                    className="cursor-pointer"
+                    className="cursor-pointer h-9 w-9 sm:h-10 sm:w-10 flex items-center justify-center"
                   >
                     {number}
                   </PaginationLink>
@@ -336,7 +357,7 @@ const ProductSection = ({ id, title, description, products, subCategories = [] }
               <PaginationItem>
                 <PaginationNext 
                   onClick={() => paginate(currentPage + 1)} 
-                  className="cursor-pointer"
+                  className="cursor-pointer h-9 w-9 sm:h-10 sm:w-10 flex items-center justify-center"
                 />
               </PaginationItem>
             )}

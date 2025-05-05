@@ -70,15 +70,15 @@
   }
   
   .btn-primary {
-    @apply bg-navyellow px-5 py-2 rounded-md text-gray-800 font-medium hover:bg-navyellow-dark transition-colors duration-300;
+    @apply bg-navyellow px-4 sm:px-5 py-2 rounded-md text-gray-800 font-medium hover:bg-navyellow-dark transition-colors duration-300 block;
   }
   
   .btn-secondary {
-    @apply bg-white border-2 border-navyellow px-5 py-2 rounded-md text-gray-800 font-medium hover:bg-navyellow/10 transition-colors duration-300;
+    @apply bg-white border-2 border-navyellow px-4 sm:px-5 py-2 rounded-md text-gray-800 font-medium hover:bg-navyellow/10 transition-colors duration-300 block;
   }
   
   .section-title {
-    @apply text-3xl md:text-4xl font-bold text-gray-800 mb-8 relative inline-block;
+    @apply text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-6 sm:mb-8 relative inline-block;
   }
   
   .section-title::after {
@@ -91,5 +91,29 @@
   
   .product-card {
     @apply bg-white rounded-lg shadow-md overflow-hidden transform transition-all hover:shadow-lg border border-transparent hover:border-navyellow;
+  }
+  
+  /* Fix for product gallery on mobile */
+  .product-gallery-item {
+    @apply aspect-square;
+  }
+}
+
+/* Custom media queries for better responsive behavior */
+@media screen and (max-width: 640px) {
+  .section-title::after {
+    width: 80%;
+  }
+}
+
+/* Improve touch targets on mobile */
+@media screen and (max-width: 480px) {
+  button, a, input, select, textarea {
+    min-height: 44px;
+  }
+  
+  .btn-primary, .btn-secondary {
+    padding-top: 0.625rem;
+    padding-bottom: 0.625rem;
   }
 }
