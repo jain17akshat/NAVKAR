@@ -1,11 +1,10 @@
-
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import CategorySection from "../components/CategorySection";
 import ProductSection from "../components/ProductSection";
 import ContactSection from "../components/ContactSection";
 import Footer from "../components/Footer";
-import { Shirt, ShirtIcon, Bookmark, FileText, Pants, Baby, User } from 'lucide-react';
+import { Shirt, ShirtIcon, Bookmark, FileText, Baby, User } from 'lucide-react';
 
 const Index = () => {
   const menProducts = [
@@ -60,17 +59,17 @@ const Index = () => {
         {
           title: "Slim Fit Jeans",
           description: "Modern slim fit designs",
-          icon: <Pants className="text-gray-700 h-8 w-8" />
+          icon: <ShirtIcon className="text-gray-700 h-8 w-8" />
         },
         {
           title: "Straight Cut Jeans",
           description: "Classic straight leg style",
-          icon: <Pants className="text-gray-700 h-8 w-8" />
+          icon: <ShirtIcon className="text-gray-700 h-8 w-8" />
         },
         {
           title: "Regular Fit Jeans",
           description: "Comfortable regular fit",
-          icon: <Pants className="text-gray-700 h-8 w-8" />
+          icon: <ShirtIcon className="text-gray-700 h-8 w-8" />
         }
       ]
     },
@@ -102,17 +101,17 @@ const Index = () => {
         {
           title: "Classic Trousers",
           description: "Timeless formal pants",
-          icon: <Pants className="text-gray-700 h-8 w-8" />
+          icon: <ShirtIcon className="text-gray-700 h-8 w-8" />
         },
         {
           title: "Slim Fit Trousers",
           description: "Modern slim cut formal pants",
-          icon: <Pants className="text-gray-700 h-8 w-8" />
+          icon: <ShirtIcon className="text-gray-700 h-8 w-8" />
         },
         {
           title: "Pleated Trousers",
           description: "Elegant pleated formal pants",
-          icon: <Pants className="text-gray-700 h-8 w-8" />
+          icon: <ShirtIcon className="text-gray-700 h-8 w-8" />
         }
       ]
     }
