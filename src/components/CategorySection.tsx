@@ -37,22 +37,22 @@ const CategorySection = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mt-8 sm:mt-12 auto-rows-fr">
           <CategoryCard
             title="Men's Collection"
-            image="https://images.unsplash.com/photo-1581092795360-fd1ca04f0952"
+            image="/images/categories/mens-collection.jpg"
             link="#men"
           />
           <CategoryCard
             title="Women's Collection"
-            image="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158"
+            image="/images/categories/womens-collection.jpg"
             link="#women"
           />
           <CategoryCard
             title="Kid's Collection"
-            image="https://images.unsplash.com/photo-1649972904349-6e44c42644a7"
+            image="/images/categories/kids-collection.jpg"
             link="#kids"
           />
           <CategoryCard
             title="Blazers & Suitings"
-            image="https://images.unsplash.com/photo-1581092795360-fd1ca04f0952"
+            image="/images/categories/blazers-collection.jpg"
             link="#blazers"
           />
         </div>

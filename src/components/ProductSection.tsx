@@ -45,7 +45,7 @@ const ProductGalleryItem = ({ id, title, image }: ProductProps) => {
       >
         <AspectRatio ratio={1/1} className="bg-gray-100">
           <img 
-            src={`https://source.unsplash.com/${image}`} 
+            src={image} 
             alt={title} 
             className="object-cover w-full h-full"
             loading="lazy"
@@ -82,7 +82,7 @@ const ProductGalleryItem = ({ id, title, image }: ProductProps) => {
             </div>
             <div className="overflow-auto max-h-full max-w-full p-2 sm:p-4">
               <img 
-                src={`https://source.unsplash.com/${image}`} 
+                src={image} 
                 alt={title}
                 className="transition-transform duration-200 ease-out"
                 style={{ transform: `scale(${zoomLevel})` }}
@@ -136,21 +136,30 @@ const ProductSection = ({ id, title, description, products, subCategories = [] }
   // Generate products based on the provided templates
   const generateProducts = (productTemplates: any[], count = 100) => {
     const expandedProducts = [];
-    const imageOptions = [
-      'photo-1519389950473-47ba0277781c',
-      'photo-1460925895917-afdab827c52f',
-      'photo-1581090464777-f3220bbe1b8b',
-      'photo-1498050108023-c5249f4df085',
-      'photo-1434494878577-86c23bcb06b9',
-      'photo-1581092795360-fd1ca04f0952',
-      'photo-1483058712412-4245e9b90334',
-      'photo-1487887235947-a955ef187fcc',
-    ];
+    
+    // Define image options by category
+    const getImageOptions = () => {
+      switch(id) {
+        case 'men':
+          return Array.from({ length: 12 }, (_, i) => `/images/products/men/men-${i + 1}.jpg`);
+        case 'women':
+          return Array.from({ length: 12 }, (_, i) => `/images/products/women/women-${i + 1}.jpg`);
+        case 'kids':
+          return Array.from({ length: 12 }, (_, i) => `/images/products/kids/kids-${i + 1}.jpg`);
+        case 'blazers':
+          return Array.from({ length: 12 }, (_, i) => `/images/products/blazers/blazer-${i + 1}.jpg`);
+        default:
+          return Array.from({ length: 12 }, (_, i) => `/images/products/general/product-${i + 1}.jpg`);
+      }
+    };
+    
+    const imageOptions = getImageOptions();
     
     for (let i = 0; i < count; i++) {
       const baseProduct = productTemplates[i % productTemplates.length];
       const randomPrice = Math.floor(Math.random() * 3000) + 500; // Prices between 500 and 3500
-      const randomImage = imageOptions[Math.floor(Math.random() * imageOptions.length)];
+      // Use modulo to cycle through image options
+      const productImage = imageOptions[i % imageOptions.length];
       
       expandedProducts.push({
         id: i + 1,
@@ -158,7 +167,7 @@ const ProductSection = ({ id, title, description, products, subCategories = [] }
         description: baseProduct.description,
         icon: baseProduct.icon,
         price: randomPrice,
-        image: randomImage
+        image: productImage
       });
     }
     
