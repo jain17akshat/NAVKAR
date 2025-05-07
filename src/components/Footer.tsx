@@ -1,7 +1,7 @@
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-800 text-white pt-10 pb-6">
+    <footer className="bg-royal-dark text-white pt-10 pb-6 border-t border-navyellow/30">
       <div className="container mx-auto px-4">
         <div className="flex flex-wrap">
           <div className="w-full md:w-1/3 mb-8">
@@ -11,7 +11,7 @@ const Footer = () => {
                 alt="Navkar Fashion Logo" 
                 className="h-10 w-auto"
               />
-              <span className="text-lg sm:text-xl font-bold">Navkar Fashion</span>
+              <span className="text-lg sm:text-xl font-bold font-playfair">Navkar Fashion</span>
             </div>
             <p className="text-gray-300 mb-4 text-center md:text-left px-6 md:px-0">
               Offering the latest fashion trends with quality fabrics and excellent craftsmanship for men, women, and kids.
@@ -20,7 +20,7 @@ const Footer = () => {
           <div className="w-full md:w-2/3">
             <div className="grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
               <div className="text-center md:text-left">
-                <h3 className="text-lg md:text-xl font-semibold mb-3 md:mb-4 text-navyellow">Quick Links</h3>
+                <h3 className="text-lg md:text-xl font-semibold mb-3 md:mb-4 text-navyellow font-playfair">Quick Links</h3>
                 <ul className="space-y-2">
                   <li><a href="#home" className="text-gray-300 hover:text-navyellow transition-colors">Home</a></li>
                   <li><a href="#men" className="text-gray-300 hover:text-navyellow transition-colors">Men</a></li>
@@ -30,7 +30,7 @@ const Footer = () => {
                 </ul>
               </div>
               <div className="text-center md:text-left">
-                <h3 className="text-lg md:text-xl font-semibold mb-3 md:mb-4 text-navyellow">Customer Service</h3>
+                <h3 className="text-lg md:text-xl font-semibold mb-3 md:mb-4 text-navyellow font-playfair">Customer Service</h3>
                 <ul className="space-y-2">
                   <li><a href="#contact" className="text-gray-300 hover:text-navyellow transition-colors">Contact Us</a></li>
                   <li><a href="#" className="text-gray-300 hover:text-navyellow transition-colors">Store Location</a></li>
@@ -39,7 +39,7 @@ const Footer = () => {
                 </ul>
               </div>
               <div className="col-span-2 md:col-span-1 text-center md:text-left mt-4 md:mt-0">
-                <h3 className="text-lg md:text-xl font-semibold mb-3 md:mb-4 text-navyellow">Follow Us</h3>
+                <h3 className="text-lg md:text-xl font-semibold mb-3 md:mb-4 text-navyellow font-playfair">Follow Us</h3>
                 <ul className="space-y-2">
                   <li><a href="#" className="text-gray-300 hover:text-navyellow transition-colors">Facebook</a></li>
                   <li><a href="#" className="text-gray-300 hover:text-navyellow transition-colors">Instagram</a></li>
