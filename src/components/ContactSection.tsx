@@ -13,22 +13,22 @@ const ContactSection = () => {
               <div className="flex items-start">
                 <MapPin className="text-navyellow mr-3 mt-1 flex-shrink-0" />
                 <div>
-                  <h4 className="font-medium text-white">Address</h4>
-                  <p className="text-gray-300">123 Fashion Street, Clothing District, City - 400001</p>
+                  <h4 className="font-medium">Address</h4>
+                  <p className="text-gray-600">123 Fashion Street, Clothing District, City - 400001</p>
                 </div>
               </div>
               <div className="flex items-start">
                 <Phone className="text-navyellow mr-3 mt-1 flex-shrink-0" />
                 <div>
-                  <h4 className="font-medium text-white">Phone</h4>
-                  <p className="text-gray-300">+91 9876543210</p>
+                  <h4 className="font-medium">Phone</h4>
+                  <p className="text-gray-600">+91 9876543210</p>
                 </div>
               </div>
               <div className="flex items-start">
                 <Mail className="text-navyellow mr-3 mt-1 flex-shrink-0" />
                 <div>
-                  <h4 className="font-medium text-white">Email</h4>
-                  <p className="text-gray-300 break-words">info@navkarfashion.com</p>
+                  <h4 className="font-medium">Email</h4>
+                  <p className="text-gray-600 break-words">info@navkarfashion.com</p>
                 </div>
               </div>
             </div>
@@ -36,13 +36,13 @@ const ContactSection = () => {
               <h3 className="text-lg md:text-xl font-semibold mb-3 md:mb-4 text-navyellow-light font-playfair">Store Hours</h3>
               <table className="w-full text-left">
                 <tbody>
-                  <tr className="border-b border-royal-accent/30">
-                    <td className="py-2 font-medium text-white">Monday - Saturday</td>
-                    <td className="py-2 text-gray-300">10:00 AM - 9:00 PM</td>
+                  <tr className="border-b border-gray-200">
+                    <td className="py-2 font-medium">Monday - Saturday</td>
+                    <td className="py-2 text-gray-600">10:00 AM - 9:00 PM</td>
                   </tr>
                   <tr>
-                    <td className="py-2 font-medium text-white">Sunday</td>
-                    <td className="py-2 text-gray-300">11:00 AM - 6:00 PM</td>
+                    <td className="py-2 font-medium">Sunday</td>
+                    <td className="py-2 text-gray-600">11:00 AM - 6:00 PM</td>
                   </tr>
                 </tbody>
               </table>

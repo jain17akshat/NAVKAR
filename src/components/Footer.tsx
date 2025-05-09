@@ -9,12 +9,11 @@ const Footer = () => {
               <img 
                 src="/lovable-uploads/d63a034e-849e-4aef-b43e-2ecae321f8da.png" 
                 alt="Navkar Fashion Logo" 
-                className="h-10 w-auto"
+                className="h w-auto"
               />
               <span className="text-lg sm:text-xl font-bold font-playfair">Navkar Fashion</span>
             </div>
             <p className="text-gray-300 mb-4 text-center md:text-left px-6 md:px-0">
-              Offering the latest fashion trends with quality fabrics and excellent craftsmanship for men, women, and kids.
             </p>
           </div>
           <div className="w-full md:w-2/3">
@@ -50,7 +49,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="border-t border-gray-700 mt-6 md:mt-8 pt-4 md:pt-6 text-center text-sm text-gray-400">
-          <p>&copy; {new Date().getFullYear()} Navkar Fashion. All rights reserved.</p>
+          {/* <p>&copy; {neFullYear()} Navkar Fashion. All rights reserved.</p> */}
         </div>
       </div>
     </footer>
