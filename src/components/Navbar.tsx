@@ -14,7 +14,7 @@ const Navbar = () => {
               alt="Navkar Fashion Logo" 
               className="h-8 w-auto sm:h-10"
             />
-            <span className="text-lg sm:text-xl md:text-2xl font-bold text-gray-800 font-playfair">Navkar Fashion</span>
+            {/* <span className="text-lg sm:text-xl md:text-2xl font-bold text-gray-800 font-playfair">Navkar Fashion</span> */}
           </div>
         </div>
       </div>
