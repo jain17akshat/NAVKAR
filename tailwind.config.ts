@@ -20,16 +20,6 @@ export default {
 		},
 		extend: {
 			colors: {
-				navyellow: {
-					DEFAULT: '#8B5CF6', // Changed from yellow to royal purple
-					light: '#D6BCFA',  // Light purple
-					dark: '#6E59A5',   // Dark purple
-				},
-				royal: {
-					DEFAULT: '#1A1F2C', // Deep royal blue/purple
-					light: '#9b87f5',   // Light royal purple
-					accent: '#7E69AB',  // Royal accent
-				},
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
 				ring: 'hsl(var(--ring))',

@@ -11,7 +11,7 @@ const Navbar = () => {
   };
 
   return (
-    <header className="w-full bg-royal border-b border-navyellow/30 sticky top-0 z-50">
+    <header className="w-full bg-white border-b border-gray-100 sticky top-0 z-50 shadow-sm">
       <div className="container mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
           {/* Logo */}
@@ -21,11 +21,7 @@ const Navbar = () => {
               alt="Navkar Fashion Logo" 
               className="h-8 w-auto sm:h-10"
             />
-<<<<<<< HEAD
-            <span className="text-lg sm:text-xl md:text-2xl font-bold text-white font-playfair">Navkar Fashion</span>
-=======
-            <span className="text-lg sm:text-xl md:text-2xl font-bold"></span>
->>>>>>> 3bad3e0 (Save work before rebase)
+            <span className="text-lg sm:text-xl md:text-2xl font-bold text-gray-800 font-playfair">Navkar Fashion</span>
           </div>
 
           {/* Desktop Navigation */}
@@ -40,7 +36,7 @@ const Navbar = () => {
 
           {/* Mobile Menu Button */}
           <div className="md:hidden">
-            <Button variant="ghost" size="icon" onClick={toggleMenu} className="text-white h-9 w-9">
+            <Button variant="ghost" size="icon" onClick={toggleMenu} className="text-gray-800 h-9 w-9">
               {isOpen ? <X size={22} /> : <Menu size={22} />}
             </Button>
           </div>
@@ -49,7 +45,7 @@ const Navbar = () => {
 
       {/* Mobile Navigation */}
       {isOpen && (
-        <div className="md:hidden bg-royal shadow-lg absolute w-full border-t border-navyellow/20">
+        <div className="md:hidden bg-white shadow-lg absolute w-full border-t border-gray-100">
           <div className="container mx-auto px-4 py-3">
             <nav className="flex flex-col space-y-3">
               <a href="#home" className="nav-link py-1" onClick={toggleMenu}>Home</a>

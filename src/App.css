@@ -7,11 +7,10 @@
   min-height: 100vh;
 }
 
-/* Royal theme background with gradient */
+/* Default theme background */
 body {
-  background-color: #1A1F2C;
-  background-image: linear-gradient(to bottom, rgba(26, 31, 44, 0.95), rgba(15, 15, 25, 0.98));
-  color: #f9f7f3;
+  background-color: #ffffff;
+  color: #333333;
 }
 
 /* Improve container width for better display */
