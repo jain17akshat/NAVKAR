@@ -37,12 +37,8 @@ const ContactSection = () => {
               <table className="w-full text-left">
                 <tbody>
                   <tr className="border-b border-gray-200">
-                    <td className="py-2 font-medium">Monday - Sunday</td>
-                    <td className="py-2 text-gray-600">10:00 AM - 9:00 PM</td>
-                  </tr>
-                  <tr>
-{/*                     <td className="py-2 font-medium">Sunday</td>
-                    <td className="py-2 text-gray-600">11:00 AM - 6:00 PM</td> */}
+                    <td className="py-2 font-medium">Monday - Saturday</td>
+                    <td className="py-2 text-gray-600">7:00 AM - 8:00 PM</td>
                   </tr>
                 </tbody>
               </table>
