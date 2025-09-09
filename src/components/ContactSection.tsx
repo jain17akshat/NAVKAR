@@ -14,21 +14,21 @@ const ContactSection = () => {
                 <MapPin className="text-navyellow mr-3 mt-1 flex-shrink-0" />
                 <div>
                   <h4 className="font-medium">Address</h4>
-                  <p className="text-gray-600">Patuna Chowk ,Rishabhdev ,Udaipur ,Rajsthan,313802</p>
+                  <p className="text-gray-600">Nagpur,Maharashtra</p>
                 </div>
               </div>
               <div className="flex items-start">
                 <Phone className="text-navyellow mr-3 mt-1 flex-shrink-0" />
                 <div>
                   <h4 className="font-medium">Phone</h4>
-                  <p className="text-gray-600">+91 9166509607 ,7742320607</p>
+                  <p className="text-gray-600">9834317162</p>
                 </div>
               </div>
               <div className="flex items-start">
                 <Mail className="text-navyellow mr-3 mt-1 flex-shrink-0" />
                 <div>
                   <h4 className="font-medium">Email</h4>
-                  <p className="text-gray-600 break-words">jain.7akshat@gmail.com</p>
+                  <p className="text-gray-600 break-words">dhoble.sakshi@gmail.com</p>
                 </div>
               </div>
             </div>
