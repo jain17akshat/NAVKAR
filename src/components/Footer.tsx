@@ -11,8 +11,8 @@ const Footer = () => {
                 alt="Navkar Fashion Logo" 
                 className="h w-auto"
               />
-              <span className="text-lg sm:text-xl font-bold font-playfair">Navkar Fashion</span>
-            </div>
+{/*               <span className="text-lg sm:text-xl font-bold font-playfair">Navkar Fashion</span>
+            </div> */}
             <p className="text-gray-600 mb-4 text-center md:text-left px-6 md:px-0">
             </p>
           </div>
